@@ -65,6 +65,33 @@ export default class Cron extends Component {
                 return
         }
     }
+    
+    componentDidUpdate(prevProps){
+        if(this.props.value != prevProps.value){
+            let tab = this.changeTab(this.props.value);
+            this.setState({selectedTab: tab || tabs[0], value: this.props.value});
+        }
+    }
+    
+    changeTab(val){
+         if(!val || val(' ').length !== 7 ) {
+            return tabs[0]
+        } else  {                       
+            if((val[1].search('/') !== -1) && (val[2] == '*') && (val[3] == '1/1')) {
+                return tabs[0];
+            } else if((val[3] == '1/1')) {
+                return tabs[1];
+            } else if((val[3].search('/') !== -1) || (val[5] == 'MON-FRI')) {
+                return tabs[2];
+            } else if (val[3] === '?') {
+                return tabs[3];
+            } else if (val[3].startsWith('L') || val[4] === '1/1') {
+                return tabs[4];
+            } else {
+                return tabs[0];
+            }
+        }
+    }
 
     tabChanged(tab) {
         this.setState({selectedTab:tab, value:this.defaultValue(tab)}); 
