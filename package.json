@@ -18,10 +18,10 @@
   "dependencies": {
     "cronstrue": "^1.72.0"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "src/lib/index.js",
+  "module": "src/lib/index.js",
   "files": [
-    "dist",
+    "src/lib",
     "README.md"
   ],
   "repository": {
